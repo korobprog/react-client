@@ -90,7 +90,7 @@ export const Card: React.FC<Props> = ({
       likedByUser
         ? await unlikePost(id).unwrap()
         : await likePost({ postId: id }).unwrap()
-
+      await refetchPost()
       await triggerGetPostById(id).unwrap()
     } catch (error) {
       if (hasErrorFiled(error)) {
