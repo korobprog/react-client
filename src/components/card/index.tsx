@@ -91,7 +91,7 @@ export const Card: React.FC<Props> = ({
         ? await unlikePost(id).unwrap()
         : await likePost({ postId: id }).unwrap()
 
-      await refetchPost()
+      await triggerGetPostById(id).unwrap()
     } catch (error) {
       if (hasErrorFiled(error)) {
         setError(error.data.error)
@@ -113,7 +113,8 @@ export const Card: React.FC<Props> = ({
           navigate("/")
           break
         case "comment":
-          await deleteComment(id).unwrap()
+          await deleteComment(commentId).unwrap()
+          await refetchPost()
           break
         default:
           throw new Error("Неверный аргумент cardFor")
