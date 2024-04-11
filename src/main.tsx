@@ -9,7 +9,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { ThemeProvider } from "./components/theme-provider"
 import { Auth } from "./pages/auth"
 import { Layout } from "./components/layout"
-import { Posts } from "./posts"
+import { Posts } from "./pages/posts/index"
 import { CurrentPost } from "./pages/current-post"
 import { UserProfile } from "./pages/user-profile"
 import Following from "./pages/following"
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         element: <CurrentPost />,
       },
       {
-        path: "users/:id",
+        path: "user/:id",
         element: <UserProfile />,
       },
       {

@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react"
 import { FaRegMoon } from "react-icons/fa"
 import { LuSunMedium } from "react-icons/lu"
-import { selectIsAuthenticated } from "../../features/user/userSlice"
+import { logout, selectIsAuthenticated } from "../../features/user/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { CiLogout } from "react-icons/ci"
@@ -20,7 +20,8 @@ export const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleLogout = () => {
+  const hadleLogout = () => {
+    dispatch(logout())
     localStorage.removeItem("token")
     navigate("/auth")
   }
@@ -42,7 +43,7 @@ export const Header = () => {
               color="default"
               variant="flat"
               className="gap-2"
-              onClick={handleLogout}
+              onClick={hadleLogout}
             >
               <CiLogout /> <span>Выйти</span>
             </Button>

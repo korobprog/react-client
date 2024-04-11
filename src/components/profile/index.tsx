@@ -1,5 +1,5 @@
 import React from "react"
-import { selectCurent } from "../../features/user/userSlice"
+import { selectCurrent } from "../../features/user/userSlice"
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react"
 import { BASE_URL } from "../../constants"
 import { useSelector } from "react-redux"
@@ -7,7 +7,7 @@ import { MdAlternateEmail } from "react-icons/md"
 import { Link } from "react-router-dom"
 
 export const Profile = () => {
-  const current = useSelector(selectCurent)
+  const current = useSelector(selectCurrent)
   if (!current) {
     return null
   }
@@ -24,7 +24,7 @@ export const Profile = () => {
         />
       </CardHeader>
       <CardBody>
-        <Link to={`/users/${id}`}>
+        <Link to={`/user/${id}`}>
           <h4 className="font-bold text-large mb-2">{name}</h4>
         </Link>
         <p className="text-default-500 flex items-center gap-2">
