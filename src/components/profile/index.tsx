@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-restricted-imports */
-import React from "react"
 import { selectCurrent } from "../../features/user/userSlice"
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react"
 import { BASE_URL } from "../../constants"

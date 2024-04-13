@@ -16,7 +16,6 @@ import {
 } from "@nextui-org/react"
 import { Input } from "../input"
 import { MdOutlineEmail } from "react-icons/md"
-import { PiPlaceholder } from "react-icons/pi"
 import { ErrorMessage } from "../error-message"
 import { hasErrorFiled } from "../../utils/has-error-filds"
 
