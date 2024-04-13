@@ -14,6 +14,8 @@
 
 ## Scripts
 
+API <https://github.com/korobprog/express-threads-api>
+
 - `dev`/`start` - start dev server and open browser
 - `build` - build for production
 - `preview` - locally preview production build
