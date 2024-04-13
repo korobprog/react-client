@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-restricted-imports */
 import React from "react"
 import { selectCurrent } from "../../features/user/userSlice"
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react"
@@ -28,8 +29,7 @@ export const Profile = () => {
           <h4 className="font-bold text-large mb-2">{name}</h4>
         </Link>
         <p className="text-default-500 flex items-center gap-2">
-          <MdAlternateEmail />
-          {email}
+          <MdAlternateEmail /> {email}
         </p>
       </CardBody>
     </Card>

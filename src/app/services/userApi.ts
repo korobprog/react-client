@@ -5,7 +5,7 @@ export const userApi = api.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation<
       { token: string },
-      { email: string; pasword: string }
+      { email: string; password: string }
     >({
       query: userData => ({
         url: "/login",
@@ -25,7 +25,7 @@ export const userApi = api.injectEndpoints({
     }),
     current: builder.query<User, void>({
       query: () => ({
-        url: `/current`,
+        url: "/current",
         method: "GET",
       }),
     }),
@@ -50,8 +50,8 @@ export const {
   useLoginMutation,
   useCurrentQuery,
   useLazyCurrentQuery,
-  useLazyGetUserByIdQuery,
   useGetUserByIdQuery,
+  useLazyGetUserByIdQuery,
   useUpdateUserMutation,
 } = userApi
 

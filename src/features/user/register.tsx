@@ -69,18 +69,18 @@ export const Register: React.FC<Props> = ({ setSelected }) => {
       />
       <ErrorMessage error={error} />
       <p className="text-center text-small">
-        Уже есть аккаунт?{""}
+        Уже есть аккаунт?{" "}
         <Link
           size="sm"
           className="cursor-pointer"
-          onProgress={() => setSelected("login")}
+          onPress={() => setSelected("login")}
         >
-          Зарегистрироваться
+          Войти
         </Link>
       </p>
       <div className="flex gap-2 justify-end">
         <Button fullWidth color="primary" type="submit" isLoading={isLoading}>
-          Войти
+          Регистрация
         </Button>
       </div>
     </form>
