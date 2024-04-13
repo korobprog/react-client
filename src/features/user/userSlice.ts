@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import type { User } from "../../app/types"
 import { userApi } from "../../app/services/userApi"
-import { Login } from "./login"
-import { Register } from "./register"
 import type { RootState } from "../../app/store"
+import type { User } from "../../app/types"
 
-interface InicialSState {
+interface InitialState {
   user: User | null
   isAuthenticated: boolean
   users: User[] | null
@@ -13,7 +11,7 @@ interface InicialSState {
   token?: string
 }
 
-const initialState: InicialSState = {
+const initialState: InitialState = {
   user: null,
   isAuthenticated: false,
   users: null,
@@ -52,6 +50,10 @@ export const { logout, resetUser } = slice.actions
 export default slice.reducer
 
 export const selectIsAuthenticated = (state: RootState) =>
-  state.user.isAuthenticated
-export const selectCurrent = (state: RootState) => state.user.current
-export const selectUser = (state: RootState) => state.user.user
+  state.auth.isAuthenticated
+
+export const selectCurrent = (state: RootState) => state.auth.current
+
+export const selectUsers = (state: RootState) => state.auth.users
+
+export const selectUser = (state: RootState) => state.auth.user

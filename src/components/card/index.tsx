@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-restricted-imports */
 import type React from "react"
 import { useState } from "react"
 
@@ -85,13 +86,17 @@ export const Card: React.FC<Props> = ({
     }
   }
 
-  const hendleClick = async () => {
+  const handleClick = async () => {
     try {
       likedByUser
         ? await unlikePost(id).unwrap()
         : await likePost({ postId: id }).unwrap()
-      await refetchPost()
-      await triggerGetPostById(id).unwrap()
+      if (cardFor === "current-post") {
+        await triggerGetPostById(id).unwrap()
+      }
+      if (cardFor === "post") {
+        await triggerGetAllPosts().unwrap()
+      }
     } catch (error) {
       if (hasErrorFiled(error)) {
         setError(error.data.error)
@@ -155,7 +160,7 @@ export const Card: React.FC<Props> = ({
       {cardFor !== "comment" && (
         <CardFooter className="gap-3">
           <div className="flex gap-5 items-center">
-            <div onClick={hendleClick}>
+            <div onClick={handleClick}>
               <MetaInfo
                 count={likesCount}
                 Icon={likedByUser ? FcDislike : MdOutlineFavoriteBorder}
@@ -164,8 +169,8 @@ export const Card: React.FC<Props> = ({
             <Link to={`/posts/${id}`}>
               <MetaInfo count={commentsCount} Icon={FaRegComment} />
             </Link>
-            <ErrorMessage error={error} />
           </div>
+          <ErrorMessage error={error} />
         </CardFooter>
       )}
     </NextUiCard>

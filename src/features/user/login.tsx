@@ -20,7 +20,7 @@ type Props = {
   setSelected: (value: string) => void
 }
 
-export const Login: React.FC<Props> = ({ setSelected }) => {
+export const Login = ({ setSelected }: Props) => {
   const {
     handleSubmit,
     control,
@@ -69,11 +69,11 @@ export const Login: React.FC<Props> = ({ setSelected }) => {
       />
       <ErrorMessage error={error} />
       <p className="text-center text-small">
-        Нет аккаунта?{""}
+        Нет аккаунта?{" "}
         <Link
           size="sm"
           className="cursor-pointer"
-          onProgress={() => setSelected("sign-up")}
+          onPress={() => setSelected("sign-up")}
         >
           Зарегистрирутесь
         </Link>

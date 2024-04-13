@@ -6,7 +6,7 @@ import { Register } from "../../features/user/register"
 export const Auth = () => {
   const [selected, setSelected] = useState("login")
   return (
-    <div className="flex item-center justify-center h-screen">
+    <div className="h-screen flex items-center justify-center">
       <div className="flex flex-col">
         <Card className="max-w-full w-[340px] h-[450px]">
           <CardBody className="overflow-hidden">

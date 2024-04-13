@@ -20,6 +20,7 @@ export const Posts = () => {
               likes,
               likedByUser,
               createdAt,
+              comments,
             }) => (
               <Card
                 key={id}
@@ -27,6 +28,7 @@ export const Posts = () => {
                 content={content}
                 name={author.name ?? ""}
                 likesCount={likes.length}
+                commentsCount={comments.length}
                 authorId={authorId}
                 id={id}
                 likedByUser={likedByUser}
