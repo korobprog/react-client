@@ -6,7 +6,7 @@ import { FaUsers } from "react-icons/fa"
 
 export const NavBar = () => {
   return (
-    <nav>
+    <nav className="nav-bar_nav">
       <ul className="flex flex-col gap-5">
         <li>
           <NavButton href="/" icon={<BsPostcard />}>
@@ -21,6 +21,11 @@ export const NavBar = () => {
         <li>
           <NavButton href="followers" icon={<FaUsers />}>
             Подписчики
+          </NavButton>
+        </li>
+        <li>
+          <NavButton href="profileuser" icon={<FaUsers />}>
+            Профиль
           </NavButton>
         </li>
       </ul>

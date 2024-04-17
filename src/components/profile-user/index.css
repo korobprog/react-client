@@ -1,0 +1,13 @@
+@media (max-width: 640px) {
+  .nav-bar_nav {
+    display: none;
+  }
+}
+@media (max-width: 1080px) {
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+  }
+}

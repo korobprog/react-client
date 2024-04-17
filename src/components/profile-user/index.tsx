@@ -8,9 +8,10 @@ import {
   selectUser,
 } from "../../features/user/userSlice"
 import { useSelector } from "react-redux"
+import { Profile } from "../profile"
 import "./index.css"
 
-export const Layout = () => {
+export const ProfileUser = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const user = useSelector(selectUser)
   const navigate = useNavigate()
@@ -23,13 +24,9 @@ export const Layout = () => {
 
   return (
     <>
-      <Header />
       <Container>
-        <div className="flex-2 p-4 sm:inline-flex nav-bar_nav">
-          <NavBar />
-        </div>
-        <div className="flex-1 p-4">
-          <Outlet />
+        <div className="flex-2 p-4">
+          <div className="flex-col flex gap-5">{!user && <Profile />}</div>
         </div>
       </Container>
     </>

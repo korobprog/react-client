@@ -78,7 +78,7 @@ export const UserProfile = () => {
   return (
     <>
       <GoBack />
-      <div className="flex items-stretch gap-4">
+      <div className="flex-auto items-stretch gap-4">
         <Card className="flex flex-col items-center text-center space-y-4 p-5 flex-2">
           <Image
             src={`${BASE_URL}${data.avatarUrl}`}
@@ -112,7 +112,7 @@ export const UserProfile = () => {
             )}
           </div>
         </Card>
-        <Card className="flex flex-col space-y-4 p-5 flex-1">
+        <Card className="flex flex-col space-y-4 p-5 flex-1 top-5">
           <ProfileInfo title="Почта:" info={data.email} />
           <ProfileInfo title="Местоположение:" info={data.location} />
           <ProfileInfo
@@ -121,7 +121,7 @@ export const UserProfile = () => {
           />
           <ProfileInfo title="Обо мне:" info={data.bio} />
 
-          <div className="flex gap-2">
+          <div className="flex-auto gap-2">
             <CountInfo count={data.followers.length} title="Подписчики" />
             <CountInfo count={data.following.length} title="Подписки" />
           </div>
