@@ -2,6 +2,7 @@
 import React, { useContext, useState } from "react"
 import { ThemeContext } from "../theme-provider"
 import {
+  Avatar,
   Button,
   Link,
   Navbar,
@@ -12,16 +13,20 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react"
-import { FaRegMoon, FaUsers } from "react-icons/fa"
+import { FaExternalLinkAlt, FaRegMoon, FaUsers } from "react-icons/fa"
 import { LuSunMedium } from "react-icons/lu"
-import { logout, selectIsAuthenticated } from "../../features/user/userSlice"
+import {
+  logout,
+  selectCurrent,
+  selectIsAuthenticated,
+} from "../../features/user/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { CiLogout } from "react-icons/ci"
 import { AcmeLogo } from "./AcmeLogo"
-import { NavButton } from "../nav-button"
 import { BsPostcard } from "react-icons/bs"
 import { FiUsers } from "react-icons/fi"
+import { BASE_URL } from "../../constants"
 
 export const Header = () => {
   const menuItems = [
@@ -41,18 +46,33 @@ export const Header = () => {
       icon: <FaUsers />,
     },
     {
-      link: "profileuser",
-      name: "Профиль",
-      icon: <FaUsers />,
+      link: "https://karavan-book-tracker.web.app/",
+      name: "BookTracker",
+      icon: <FaExternalLinkAlt />,
+    },
+    {
+      link: "https://sankirtana-map.web.app/",
+      name: "MapsBooks",
+      icon: <FaExternalLinkAlt />,
     },
   ]
+  const current = useSelector(selectCurrent)
+  if (!current) {
+    return null
+  }
+  const { avatarUrl } = current
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { theme, toggleTheme } = useContext(ThemeContext)
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const isAuthenticate = useSelector(selectIsAuthenticated)
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isMenuOpen, setIsMenuOpen] = React.useReducer(
     current => !current,
     false,
   )
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useDispatch()
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate()
   const hadleLogout = () => {
     dispatch(logout())
@@ -68,18 +88,24 @@ export const Header = () => {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">BookSocial</p>
+          <Link href="/" color="foreground">
+            <AcmeLogo />
+            <p className="font-bold text-inherit">BookSocial</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">BookSocial</p>
+          <Link href="/" color="foreground">
+            <AcmeLogo />
+            <p className="font-bold text-inherit">BookSocial</p>
+          </Link>
         </NavbarBrand>
         <NavbarItem>
           <Link
+            isBlock
+            showAnchorIcon
             color="foreground"
             href="https://karavan-book-tracker.web.app/ "
             target="_blank"
@@ -90,7 +116,8 @@ export const Header = () => {
         <NavbarItem>
           <Link
             href="https://sankirtana-map.web.app/"
-            aria-current="page"
+            isBlock
+            showAnchorIcon
             color="foreground"
             target="_blank"
           >
@@ -109,7 +136,7 @@ export const Header = () => {
               onPress={() => setIsMenuOpen()}
               underline="focus"
             >
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-row  gap-3 pb-3">
                 {item.icon}
                 {item.name}
               </div>
@@ -118,9 +145,6 @@ export const Header = () => {
         ))}
       </NavbarMenu>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
         <NavbarItem
           className="lg:flex text-3xl cursor-pointer"
           onClick={() => toggleTheme()}
@@ -131,11 +155,23 @@ export const Header = () => {
           {isAuthenticate && (
             <Button
               color="default"
-              variant="flat"
-              className="gap-2"
+              variant="light"
               onClick={hadleLogout}
+              className="z-0"
+              startContent={
+                <Avatar
+                  isBordered
+                  color="default"
+                  showFallback
+                  src={`${BASE_URL}${avatarUrl}`}
+                  fallback={<CiLogout />}
+                  icon={<CiLogout />}
+                  className="w-7 h-7"
+                />
+              }
             >
-              <CiLogout /> <span>Выйти</span>
+              <CiLogout />
+              <span>Выйти</span>
             </Button>
           )}
         </NavbarItem>

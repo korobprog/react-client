@@ -15,6 +15,7 @@ import Following from "./pages/following"
 import Followers from "./pages/followers"
 import { AuthGuard } from "./features/user/authGuard"
 import { ProfileUser } from "./components/profile-user"
+import { Profile } from "./components/profile"
 
 const container = document.getElementById("root")
 
@@ -43,10 +44,6 @@ const router = createBrowserRouter([
       {
         path: "followers",
         element: <Followers />,
-      },
-      {
-        path: "profileuser",
-        element: <ProfileUser />,
       },
     ],
   },

@@ -25,7 +25,7 @@ export const ProfileUser = () => {
   return (
     <>
       <Container>
-        <div className="flex-2 p-4">
+        <div className="flex-2 p-2">
           <div className="flex-col flex gap-5">{!user && <Profile />}</div>
         </div>
       </Container>
