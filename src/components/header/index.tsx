@@ -4,6 +4,7 @@ import { ThemeContext } from "../theme-provider"
 import {
   Avatar,
   Button,
+  Image,
   Link,
   Navbar,
   NavbarBrand,
@@ -12,6 +13,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
+  User,
 } from "@nextui-org/react"
 import { FaExternalLinkAlt, FaRegMoon, FaUsers } from "react-icons/fa"
 import { LuSunMedium } from "react-icons/lu"
@@ -23,10 +25,10 @@ import {
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { CiLogout } from "react-icons/ci"
-import { AcmeLogo } from "./AcmeLogo"
 import { BsPostcard } from "react-icons/bs"
 import { FiUsers } from "react-icons/fi"
 import { BASE_URL } from "../../constants"
+import { Link as ReactRouterLink } from "react-router-dom"
 
 export const Header = () => {
   const menuItems = [
@@ -60,7 +62,7 @@ export const Header = () => {
   if (!current) {
     return null
   }
-  const { avatarUrl } = current
+  const { avatarUrl, id, email, name } = current
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { theme, toggleTheme } = useContext(ThemeContext)
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -86,22 +88,12 @@ export const Header = () => {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden pr-3" justify="center">
-        <NavbarBrand>
-          <Link href="/" color="foreground">
-            <AcmeLogo />
-            <p className="font-bold text-inherit">BookSocial</p>
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
-
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarBrand>
-          <Link href="/" color="foreground">
-            <AcmeLogo />
-            <p className="font-bold text-inherit">BookSocial</p>
+        <NavbarItem>
+          <Link href="/" isBlock color="success">
+            BookS
           </Link>
-        </NavbarBrand>
+        </NavbarItem>
         <NavbarItem>
           <Link
             isBlock
@@ -128,19 +120,12 @@ export const Header = () => {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={index}>
-            <Link
-              color="foreground"
-              className="w-full"
-              href={item.link}
-              size="lg"
-              onPress={() => setIsMenuOpen()}
-              underline="focus"
-            >
+            <ReactRouterLink to={item.link} onClick={() => setIsMenuOpen()}>
               <div className="flex flex-row  gap-3 pb-3">
                 {item.icon}
                 {item.name}
               </div>
-            </Link>
+            </ReactRouterLink>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
@@ -153,28 +138,30 @@ export const Header = () => {
         </NavbarItem>
         <NavbarItem>
           {isAuthenticate && (
-            <Button
-              color="default"
-              variant="light"
-              onClick={hadleLogout}
-              className="z-0"
-              startContent={
-                <Avatar
-                  isBordered
-                  color="default"
-                  showFallback
-                  src={`${BASE_URL}${avatarUrl}`}
-                  fallback={<CiLogout />}
-                  icon={<CiLogout />}
-                  className="w-7 h-7"
-                />
+            <User
+              name={name}
+              isFocusable
+              description={
+                <Link href={`/user/${id}`} size="sm">
+                  {email}
+                </Link>
               }
-            >
-              <CiLogout />
-              <span>Выйти</span>
-            </Button>
+              avatarProps={{
+                src: `${BASE_URL}${avatarUrl}`,
+              }}
+            />
           )}
         </NavbarItem>
+        <NavbarMenuItem>
+          <Button
+            color="default"
+            variant="light"
+            onClick={hadleLogout}
+            className="z-0"
+          >
+            <CiLogout className="w-5 h-5" />
+          </Button>
+        </NavbarMenuItem>
       </NavbarContent>
     </Navbar>
   )

@@ -3,7 +3,6 @@ import { selectCurrent } from "../../features/user/userSlice"
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react"
 import { BASE_URL } from "../../constants"
 import { useSelector } from "react-redux"
-import { MdAlternateEmail } from "react-icons/md"
 import { Link } from "react-router-dom"
 
 export const Profile = () => {
@@ -27,9 +26,7 @@ export const Profile = () => {
         <Link to={`/user/${id}`}>
           <h4 className="font-bold text-large mb-2">{name}</h4>
         </Link>
-        <p className="text-default-500 flex items-center gap-2">
-          <MdAlternateEmail /> {email}
-        </p>
+        <p className="text-default-500 flex items-center gap-2">{email}</p>
       </CardBody>
     </Card>
   )
