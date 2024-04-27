@@ -41,7 +41,7 @@ export const CreatePost = () => {
           <Textarea
             {...field}
             labelPlacement="outside"
-            placeholder="Напишите историю санкиртаны..."
+            placeholder="Напишите пост, история, укажите хорошее место локации распостранения..."
             className="mb-5"
           />
         )}

@@ -14,6 +14,7 @@ import { UserProfile } from "./pages/user-profile"
 import Following from "./pages/following"
 import Followers from "./pages/followers"
 import { AuthGuard } from "./features/user/authGuard"
+import { socket } from "./socket"
 
 const container = document.getElementById("root")
 

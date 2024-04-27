@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 type Props = {
   children: React.ReactNode
-  icon: JSX.Element
+  icon?: JSX.Element
   href: string
 }
 
