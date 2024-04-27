@@ -1,4 +1,5 @@
 import React from "react"
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { useSelector } from "react-redux"
 import { selectCurrent } from "../../features/user/userSlice"
 import { Link } from "react-router-dom"

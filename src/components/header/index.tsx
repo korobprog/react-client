@@ -2,17 +2,19 @@
 import React, { useContext, useState } from "react"
 import { ThemeContext } from "../theme-provider"
 import {
-  Avatar,
   Button,
-  Image,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Link,
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
+  Skeleton,
   User,
 } from "@nextui-org/react"
 import { FaExternalLinkAlt, FaRegMoon, FaUsers } from "react-icons/fa"
@@ -29,6 +31,7 @@ import { BsPostcard } from "react-icons/bs"
 import { FiUsers } from "react-icons/fi"
 import { BASE_URL } from "../../constants"
 import { Link as ReactRouterLink } from "react-router-dom"
+import { FaBookOpenReader } from "react-icons/fa6"
 
 export const Header = () => {
   const menuItems = [
@@ -87,13 +90,7 @@ export const Header = () => {
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle />
       </NavbarContent>
-
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link href="/" isBlock color="success">
-            BookS
-          </Link>
-        </NavbarItem>
         <NavbarItem>
           <Link
             isBlock
@@ -129,39 +126,70 @@ export const Header = () => {
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
+      <NavbarItem>
+        <ReactRouterLink to="/" color="success">
+          <FaBookOpenReader className="h-7 w-7" />
+        </ReactRouterLink>
+      </NavbarItem>
       <NavbarContent justify="end">
-        <NavbarItem
-          className="lg:flex text-3xl cursor-pointer"
-          onClick={() => toggleTheme()}
-        >
-          {theme === "light" ? <FaRegMoon /> : <LuSunMedium />}
-        </NavbarItem>
         <NavbarItem>
-          {isAuthenticate && (
-            <User
-              name={name}
-              isFocusable
-              description={
-                <Link href={`/user/${id}`} size="sm">
-                  {email}
-                </Link>
-              }
-              avatarProps={{
-                src: `${BASE_URL}${avatarUrl}`,
-              }}
-            />
-          )}
+          <Dropdown placement="bottom-start">
+            <DropdownTrigger>
+              {isAuthenticate ? (
+                <User
+                  name={name}
+                  isFocusable
+                  description={
+                    <ReactRouterLink to={`/user/${id}`}>
+                      {email}
+                    </ReactRouterLink>
+                  }
+                  avatarProps={{
+                    src: `${BASE_URL}${avatarUrl}`,
+                  }}
+                />
+              ) : (
+                <div className="max-w-[300px] w-full flex items-center gap-3">
+                  <div>
+                    <Skeleton className="flex rounded-full w-12 h-12" />
+                  </div>
+                  <div className="w-full flex flex-col gap-2">
+                    <Skeleton className="h-3 w-3/5 rounded-lg" />
+                    <Skeleton className="h-3 w-4/5 rounded-lg" />
+                  </div>
+                </div>
+              )}
+            </DropdownTrigger>
+            <DropdownMenu aria-label="User Actions" variant="flat">
+              <DropdownItem key="tem">
+                <NavbarItem
+                  className="lg:flex text-3xl cursor-pointer"
+                  onClick={() => toggleTheme()}
+                >
+                  {theme === "light" ? <FaRegMoon /> : <LuSunMedium />}
+                </NavbarItem>
+              </DropdownItem>
+              <DropdownItem key="profile" className="h-4 gap-2"></DropdownItem>
+              <DropdownItem key="settings">
+                <ReactRouterLink to={`/user/${id}`}>
+                  Мой профиль
+                </ReactRouterLink>
+              </DropdownItem>
+              <DropdownItem key="logout" color="danger">
+                <Button
+                  color="default"
+                  variant="light"
+                  onClick={hadleLogout}
+                  className="z-0"
+                >
+                  Выход
+                  <CiLogout className="w-5 h-5" />
+                </Button>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </NavbarItem>
-        <NavbarMenuItem>
-          <Button
-            color="default"
-            variant="light"
-            onClick={hadleLogout}
-            className="z-0"
-          >
-            <CiLogout className="w-5 h-5" />
-          </Button>
-        </NavbarMenuItem>
+        <NavbarMenuItem></NavbarMenuItem>
       </NavbarContent>
     </Navbar>
   )

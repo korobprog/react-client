@@ -53,3 +53,12 @@ export type Comment = {
   post: Post
   postId: string
 }
+
+export type Chat = {
+  id: string
+  content: string
+  author: User
+  authorId: string
+  createdAt: Date
+  updatedAt: Date
+}
